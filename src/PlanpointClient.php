@@ -9,7 +9,7 @@ use Planpoint\Floors\FloorsClient;
 use Planpoint\Units\UnitsClient;
 use Planpoint\Leads\LeadsClient;
 use GuzzleHttp\ClientInterface;
-use Planpoint\Core\RawClient;
+use Planpoint\Core\Client\RawClient;
 
 class PlanpointClient
 {
@@ -44,13 +44,15 @@ class PlanpointClient
     public LeadsClient $leads;
 
     /**
-     * @var ?array{
+     * @var array{
      *   baseUrl?: string,
      *   client?: ClientInterface,
+     *   maxRetries?: int,
+     *   timeout?: float,
      *   headers?: array<string, string>,
      * } $options
      */
-    private ?array $options;
+    private array $options;
 
     /**
      * @var RawClient $client
@@ -62,6 +64,8 @@ class PlanpointClient
      * @param ?array{
      *   baseUrl?: string,
      *   client?: ClientInterface,
+     *   maxRetries?: int,
+     *   timeout?: float,
      *   headers?: array<string, string>,
      * } $options
      */
@@ -72,7 +76,8 @@ class PlanpointClient
         $defaultHeaders = [
             'X-Fern-Language' => 'PHP',
             'X-Fern-SDK-Name' => 'Planpoint',
-            'X-Fern-SDK-Version' => '0.0.25',
+            'X-Fern-SDK-Version' => '0.0.30',
+            'User-Agent' => 'planpoint/planpoint/0.0.30',
         ];
         if ($token != null) {
             $defaultHeaders['Authorization'] = "Bearer $token";
@@ -88,11 +93,11 @@ class PlanpointClient
             options: $this->options,
         );
 
-        $this->authentication = new AuthenticationClient($this->client);
-        $this->projects = new ProjectsClient($this->client);
-        $this->groups = new GroupsClient($this->client);
-        $this->floors = new FloorsClient($this->client);
-        $this->units = new UnitsClient($this->client);
-        $this->leads = new LeadsClient($this->client);
+        $this->authentication = new AuthenticationClient($this->client, $this->options);
+        $this->projects = new ProjectsClient($this->client, $this->options);
+        $this->groups = new GroupsClient($this->client, $this->options);
+        $this->floors = new FloorsClient($this->client, $this->options);
+        $this->units = new UnitsClient($this->client, $this->options);
+        $this->leads = new LeadsClient($this->client, $this->options);
     }
 }

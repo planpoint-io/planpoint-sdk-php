@@ -2,11 +2,11 @@
 
 namespace Planpoint\Types;
 
-use Planpoint\Core\SerializableType;
-use Planpoint\Core\JsonProperty;
-use Planpoint\Core\ArrayType;
+use Planpoint\Core\Json\JsonSerializableType;
+use Planpoint\Core\Json\JsonProperty;
+use Planpoint\Core\Types\ArrayType;
 
-class Project extends SerializableType
+class Project extends JsonSerializableType
 {
     /**
      * @var string $id
@@ -247,5 +247,13 @@ class Project extends SerializableType
         $this->websiteUrl = $values['websiteUrl'] ?? null;
         $this->customDomain = $values['customDomain'] ?? null;
         $this->sharePageEnabled = $values['sharePageEnabled'] ?? null;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->toJson();
     }
 }

@@ -2,9 +2,9 @@
 
 namespace Planpoint\Floors\Requests;
 
-use Planpoint\Core\SerializableType;
+use Planpoint\Core\Json\JsonSerializableType;
 
-class GetFloorsRequest extends SerializableType
+class GetFloorsRequest extends JsonSerializableType
 {
     /**
      * @var string $pid

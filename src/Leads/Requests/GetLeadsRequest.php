@@ -2,9 +2,9 @@
 
 namespace Planpoint\Leads\Requests;
 
-use Planpoint\Core\SerializableType;
+use Planpoint\Core\Json\JsonSerializableType;
 
-class GetLeadsRequest extends SerializableType
+class GetLeadsRequest extends JsonSerializableType
 {
     /**
      * @var string $pid

@@ -2,11 +2,11 @@
 
 namespace Planpoint\Types;
 
-use Planpoint\Core\SerializableType;
-use Planpoint\Core\JsonProperty;
-use Planpoint\Core\ArrayType;
+use Planpoint\Core\Json\JsonSerializableType;
+use Planpoint\Core\Json\JsonProperty;
+use Planpoint\Core\Types\ArrayType;
 
-class UnitsListResponse extends SerializableType
+class UnitsListResponse extends JsonSerializableType
 {
     /**
      * @var array<UnitFull> $records
@@ -31,5 +31,13 @@ class UnitsListResponse extends SerializableType
     ) {
         $this->records = $values['records'];
         $this->count = $values['count'];
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->toJson();
     }
 }

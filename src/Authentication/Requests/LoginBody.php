@@ -2,10 +2,10 @@
 
 namespace Planpoint\Authentication\Requests;
 
-use Planpoint\Core\SerializableType;
-use Planpoint\Core\JsonProperty;
+use Planpoint\Core\Json\JsonSerializableType;
+use Planpoint\Core\Json\JsonProperty;
 
-class LoginBody extends SerializableType
+class LoginBody extends JsonSerializableType
 {
     /**
      * @var string $username

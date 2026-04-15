@@ -2,11 +2,11 @@
 
 namespace Planpoint\Units\Requests;
 
-use Planpoint\Core\SerializableType;
-use Planpoint\Core\JsonProperty;
-use Planpoint\Core\ArrayType;
+use Planpoint\Core\Json\JsonSerializableType;
+use Planpoint\Core\Json\JsonProperty;
+use Planpoint\Core\Types\ArrayType;
 
-class BatchUpdateUnitsBody extends SerializableType
+class BatchUpdateUnitsBody extends JsonSerializableType
 {
     /**
      * @var array<string> $ids

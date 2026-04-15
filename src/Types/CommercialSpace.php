@@ -2,10 +2,10 @@
 
 namespace Planpoint\Types;
 
-use Planpoint\Core\SerializableType;
-use Planpoint\Core\JsonProperty;
+use Planpoint\Core\Json\JsonSerializableType;
+use Planpoint\Core\Json\JsonProperty;
 
-class CommercialSpace extends SerializableType
+class CommercialSpace extends JsonSerializableType
 {
     /**
      * @var string $id
@@ -54,5 +54,13 @@ class CommercialSpace extends SerializableType
         $this->status = $values['status'] ?? null;
         $this->price = $values['price'] ?? null;
         $this->sqft = $values['sqft'] ?? null;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->toJson();
     }
 }

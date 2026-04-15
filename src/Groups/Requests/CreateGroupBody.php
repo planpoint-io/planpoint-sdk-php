@@ -2,10 +2,10 @@
 
 namespace Planpoint\Groups\Requests;
 
-use Planpoint\Core\SerializableType;
-use Planpoint\Core\JsonProperty;
+use Planpoint\Core\Json\JsonSerializableType;
+use Planpoint\Core\Json\JsonProperty;
 
-class CreateGroupBody extends SerializableType
+class CreateGroupBody extends JsonSerializableType
 {
     /**
      * @var string $name

@@ -2,10 +2,10 @@
 
 namespace Planpoint\Types;
 
-use Planpoint\Core\SerializableType;
-use Planpoint\Core\JsonProperty;
+use Planpoint\Core\Json\JsonSerializableType;
+use Planpoint\Core\Json\JsonProperty;
 
-class Lead extends SerializableType
+class Lead extends JsonSerializableType
 {
     /**
      * @var ?string $id
@@ -61,7 +61,7 @@ class Lead extends SerializableType
      * } $values
      */
     public function __construct(
-        array $values,
+        array $values = [],
     ) {
         $this->id = $values['id'] ?? null;
         $this->name = $values['name'] ?? null;
@@ -70,5 +70,13 @@ class Lead extends SerializableType
         $this->message = $values['message'] ?? null;
         $this->unit = $values['unit'] ?? null;
         $this->createdAt = $values['createdAt'] ?? null;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->toJson();
     }
 }

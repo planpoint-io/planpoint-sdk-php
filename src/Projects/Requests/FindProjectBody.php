@@ -2,10 +2,10 @@
 
 namespace Planpoint\Projects\Requests;
 
-use Planpoint\Core\SerializableType;
-use Planpoint\Core\JsonProperty;
+use Planpoint\Core\Json\JsonSerializableType;
+use Planpoint\Core\Json\JsonProperty;
 
-class FindProjectBody extends SerializableType
+class FindProjectBody extends JsonSerializableType
 {
     /**
      * @var string $namespace

@@ -2,11 +2,12 @@
 
 namespace Planpoint\Types;
 
-use Planpoint\Core\SerializableType;
-use Planpoint\Core\JsonProperty;
-use Planpoint\Core\ArrayType;
+use Planpoint\Core\Json\JsonSerializableType;
+use Planpoint\Core\Json\JsonProperty;
+use Planpoint\Core\Types\ArrayType;
+use Planpoint\Core\Types\Union;
 
-class Group extends SerializableType
+class Group extends JsonSerializableType
 {
     /**
      * @var string $id
@@ -51,9 +52,12 @@ class Group extends SerializableType
     public string $user;
 
     /**
-     * @var ?array<mixed> $projects
+     * @var ?array<(
+     *    GroupProject
+     *   |string
+     * )> $projects
      */
-    #[JsonProperty('projects'), ArrayType(['mixed'])]
+    #[JsonProperty('projects'), ArrayType([new Union(GroupProject::class, 'string')])]
     public ?array $projects;
 
     /**
@@ -77,13 +81,16 @@ class Group extends SerializableType
     /**
      * @param array{
      *   id: string,
+     *   user: string,
      *   name?: ?string,
      *   namespace?: ?string,
      *   hostName?: ?string,
      *   type?: ?string,
      *   propertyType?: ?string,
-     *   user: string,
-     *   projects?: ?array<mixed>,
+     *   projects?: ?array<(
+     *    GroupProject
+     *   |string
+     * )>,
      *   isOwner?: ?bool,
      *   isAdmin?: ?bool,
      *   isEditor?: ?bool,
@@ -103,5 +110,13 @@ class Group extends SerializableType
         $this->isOwner = $values['isOwner'] ?? null;
         $this->isAdmin = $values['isAdmin'] ?? null;
         $this->isEditor = $values['isEditor'] ?? null;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->toJson();
     }
 }

@@ -2,10 +2,10 @@
 
 namespace Planpoint\Types;
 
-use Planpoint\Core\SerializableType;
-use Planpoint\Core\JsonProperty;
+use Planpoint\Core\Json\JsonSerializableType;
+use Planpoint\Core\Json\JsonProperty;
 
-class GroupProject extends SerializableType
+class GroupProject extends JsonSerializableType
 {
     /**
      * @var string $id
@@ -54,5 +54,13 @@ class GroupProject extends SerializableType
         $this->namespace = $values['namespace'] ?? null;
         $this->hostName = $values['hostName'] ?? null;
         $this->paused = $values['paused'] ?? null;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->toJson();
     }
 }

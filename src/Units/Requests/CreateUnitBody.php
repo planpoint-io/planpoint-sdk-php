@@ -2,11 +2,11 @@
 
 namespace Planpoint\Units\Requests;
 
-use Planpoint\Core\SerializableType;
+use Planpoint\Core\Json\JsonSerializableType;
 use Planpoint\Units\Types\CreateUnitBodyFloor;
-use Planpoint\Core\JsonProperty;
+use Planpoint\Core\Json\JsonProperty;
 
-class CreateUnitBody extends SerializableType
+class CreateUnitBody extends JsonSerializableType
 {
     /**
      * @var CreateUnitBodyFloor $floor

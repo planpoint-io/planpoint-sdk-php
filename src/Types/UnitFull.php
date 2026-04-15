@@ -2,10 +2,10 @@
 
 namespace Planpoint\Types;
 
-use Planpoint\Core\SerializableType;
-use Planpoint\Core\JsonProperty;
+use Planpoint\Core\Json\JsonSerializableType;
+use Planpoint\Core\Json\JsonProperty;
 
-class UnitFull extends SerializableType
+class UnitFull extends JsonSerializableType
 {
     /**
      * @var string $id
@@ -110,5 +110,13 @@ class UnitFull extends SerializableType
         $this->model = $values['model'] ?? null;
         $this->orientation = $values['orientation'] ?? null;
         $this->parking = $values['parking'] ?? null;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->toJson();
     }
 }

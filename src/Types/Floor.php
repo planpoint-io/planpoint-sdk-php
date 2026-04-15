@@ -2,11 +2,11 @@
 
 namespace Planpoint\Types;
 
-use Planpoint\Core\SerializableType;
-use Planpoint\Core\JsonProperty;
-use Planpoint\Core\ArrayType;
+use Planpoint\Core\Json\JsonSerializableType;
+use Planpoint\Core\Json\JsonProperty;
+use Planpoint\Core\Types\ArrayType;
 
-class Floor extends SerializableType
+class Floor extends JsonSerializableType
 {
     /**
      * @var string $id
@@ -55,5 +55,13 @@ class Floor extends SerializableType
         $this->level = $values['level'] ?? null;
         $this->units = $values['units'] ?? null;
         $this->image = $values['image'] ?? null;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->toJson();
     }
 }

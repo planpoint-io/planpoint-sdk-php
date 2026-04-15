@@ -2,10 +2,10 @@
 
 namespace Planpoint\Types;
 
-use Planpoint\Core\SerializableType;
-use Planpoint\Core\JsonProperty;
+use Planpoint\Core\Json\JsonSerializableType;
+use Planpoint\Core\Json\JsonProperty;
 
-class LoginResponse extends SerializableType
+class LoginResponse extends JsonSerializableType
 {
     /**
      * @var string $message
@@ -30,5 +30,13 @@ class LoginResponse extends SerializableType
     ) {
         $this->message = $values['message'];
         $this->accessToken = $values['accessToken'];
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->toJson();
     }
 }

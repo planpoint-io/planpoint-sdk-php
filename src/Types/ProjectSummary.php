@@ -2,10 +2,11 @@
 
 namespace Planpoint\Types;
 
-use Planpoint\Core\SerializableType;
-use Planpoint\Core\JsonProperty;
+use Planpoint\Core\Json\JsonSerializableType;
+use Planpoint\Core\Json\JsonProperty;
+use Planpoint\Core\Types\Union;
 
-class ProjectSummary extends SerializableType
+class ProjectSummary extends JsonSerializableType
 {
     /**
      * @var string $id
@@ -50,10 +51,13 @@ class ProjectSummary extends SerializableType
     public ?string $statusOverride;
 
     /**
-     * @var mixed $paused
+     * @var (
+     *    bool
+     *   |ProjectSummaryPausedReason
+     * )|null $paused
      */
-    #[JsonProperty('paused')]
-    public mixed $paused;
+    #[JsonProperty('paused'), Union('bool', ProjectSummaryPausedReason::class, 'null')]
+    public bool|ProjectSummaryPausedReason|null $paused;
 
     /**
      * @var ?string $createdAt
@@ -70,7 +74,10 @@ class ProjectSummary extends SerializableType
      *   projectType?: ?string,
      *   status?: ?string,
      *   statusOverride?: ?string,
-     *   paused: mixed,
+     *   paused?: (
+     *    bool
+     *   |ProjectSummaryPausedReason
+     * )|null,
      *   createdAt?: ?string,
      * } $values
      */
@@ -84,7 +91,15 @@ class ProjectSummary extends SerializableType
         $this->projectType = $values['projectType'] ?? null;
         $this->status = $values['status'] ?? null;
         $this->statusOverride = $values['statusOverride'] ?? null;
-        $this->paused = $values['paused'];
+        $this->paused = $values['paused'] ?? null;
         $this->createdAt = $values['createdAt'] ?? null;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->toJson();
     }
 }

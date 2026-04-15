@@ -2,10 +2,10 @@
 
 namespace Planpoint\Units\Types;
 
-use Planpoint\Core\SerializableType;
-use Planpoint\Core\JsonProperty;
+use Planpoint\Core\Json\JsonSerializableType;
+use Planpoint\Core\Json\JsonProperty;
 
-class CreateUnitBodyFloor extends SerializableType
+class CreateUnitBodyFloor extends JsonSerializableType
 {
     /**
      * @var string $id
@@ -22,5 +22,13 @@ class CreateUnitBodyFloor extends SerializableType
         array $values,
     ) {
         $this->id = $values['id'];
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->toJson();
     }
 }

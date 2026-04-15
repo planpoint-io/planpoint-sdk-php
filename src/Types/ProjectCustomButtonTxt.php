@@ -2,13 +2,13 @@
 
 namespace Planpoint\Types;
 
-use Planpoint\Core\SerializableType;
-use Planpoint\Core\JsonProperty;
+use Planpoint\Core\Json\JsonSerializableType;
+use Planpoint\Core\Json\JsonProperty;
 
 /**
  * Translated string per language code
  */
-class ProjectCustomButtonTxt extends SerializableType
+class ProjectCustomButtonTxt extends JsonSerializableType
 {
     /**
      * @var ?string $en
@@ -50,12 +50,20 @@ class ProjectCustomButtonTxt extends SerializableType
      * } $values
      */
     public function __construct(
-        array $values,
+        array $values = [],
     ) {
         $this->en = $values['en'] ?? null;
         $this->fr = $values['fr'] ?? null;
         $this->de = $values['de'] ?? null;
         $this->es = $values['es'] ?? null;
         $this->zh = $values['zh'] ?? null;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->toJson();
     }
 }
