@@ -5,7 +5,7 @@ namespace Planpoint\Types;
 use Planpoint\Core\Json\JsonSerializableType;
 use Planpoint\Core\Json\JsonProperty;
 
-class LoginResponse extends JsonSerializableType
+class AuthResponse extends JsonSerializableType
 {
     /**
      * @var string $message

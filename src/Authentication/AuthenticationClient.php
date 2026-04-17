@@ -5,7 +5,7 @@ namespace Planpoint\Authentication;
 use GuzzleHttp\ClientInterface;
 use Planpoint\Core\Client\RawClient;
 use Planpoint\Authentication\Requests\LoginBody;
-use Planpoint\Types\LoginResponse;
+use Planpoint\Types\AuthResponse;
 use Planpoint\Exceptions\PlanpointException;
 use Planpoint\Exceptions\PlanpointApiException;
 use Planpoint\Core\Json\JsonApiRequest;
@@ -61,11 +61,11 @@ class AuthenticationClient
      *   queryParameters?: array<string, mixed>,
      *   bodyProperties?: array<string, mixed>,
      * } $options
-     * @return LoginResponse
+     * @return AuthResponse
      * @throws PlanpointException
      * @throws PlanpointApiException
      */
-    public function login(LoginBody $request, ?array $options = null): LoginResponse
+    public function login(LoginBody $request, ?array $options = null): AuthResponse
     {
         $options = array_merge($this->options, $options ?? []);
         try {
@@ -81,7 +81,7 @@ class AuthenticationClient
             $statusCode = $response->getStatusCode();
             if ($statusCode >= 200 && $statusCode < 400) {
                 $json = $response->getBody()->getContents();
-                return LoginResponse::fromJson($json);
+                return AuthResponse::fromJson($json);
             }
         } catch (JsonException $e) {
             throw new PlanpointException(message: "Failed to deserialize response: {$e->getMessage()}", previous: $e);
