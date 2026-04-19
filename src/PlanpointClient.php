@@ -76,8 +76,8 @@ class PlanpointClient
         $defaultHeaders = [
             'X-Fern-Language' => 'PHP',
             'X-Fern-SDK-Name' => 'Planpoint',
-            'X-Fern-SDK-Version' => '0.0.48',
-            'User-Agent' => 'planpoint/planpoint/0.0.48',
+            'X-Fern-SDK-Version' => '0.0.50',
+            'User-Agent' => 'planpoint/planpoint/0.0.50',
         ];
         if ($token != null) {
             $defaultHeaders['Authorization'] = "Bearer $token";
